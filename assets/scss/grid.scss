@@ -1,0 +1,119 @@
+
+@use "_variables.scss" as vars;
+.grid {
+    width: 100%;
+    display: block;
+
+    &.wide {
+        max-width: 1200px;
+        margin: 0 auto;
+    }
+}
+
+.row {
+    display: flex;
+    flex-wrap: wrap;
+    flex-direction: row;
+    margin-left: -1 * vars.$mobile-gutters;
+    margin-right: -1 * vars.$mobile-gutters;
+}
+
+@mixin col-padding ($padding) {
+    padding-left: $padding;
+    padding-right: $padding;
+}
+
+@each $col, $width in vars.$col-numbers {
+    .col-xs-#{$col} {
+        @include col-padding(vars.$mobile-gutters);
+        flex: 0 0 $width;
+        max-width: $width;
+    }
+
+    .offset-xs-#{$col} {
+        margin-left: $width;
+    }
+}
+
+// Small devices (landscape phones, 576px and up)
+@media (min-width: 576px) { 
+    @each $col, $width in vars.$col-numbers {
+        .col-sm-#{$col} {
+            display: block;
+            @include col-padding(vars.$tablet-gutters);
+            flex: 0 0 $width;
+            max-width: $width;
+        }
+    
+        .offset-sm-#{$col} {
+            margin-left: $width;
+        }
+    }
+ }
+
+// Medium devices (tablets, 768px and up)
+@media screen and (min-width: 768px) {
+    .row {
+        margin-left: -1 * vars.$tablet-gutters;
+        margin-right: -1 * vars.$tablet-gutters;
+    }
+
+    @each $col, $width in vars.$col-numbers {
+        .col-md-#{$col} {
+            display: block;
+            @include col-padding(vars.$tablet-gutters);
+            flex: 0 0 $width;
+            max-width: $width;
+        }
+    
+        .offset-md-#{$col} {
+            margin-left: $width;
+        }
+    }
+}
+
+// Large devices (desktops, 992px and up)
+@media screen and (min-width: 992px) {
+    .row {
+        margin-left: -1 * vars.$pc-gutters;
+        margin-right: -1 * vars.$pc-gutters;
+    }
+
+    @each $col, $width in vars.$col-numbers {
+        .col-lg-#{$col} {
+            display: block;
+            @include col-padding(vars.$pc-gutters);
+            flex: 0 0 $width;
+            max-width: $width;
+        }
+    
+        .offset-lg-#{$col} {
+            margin-left: $width;
+        }
+    }
+}
+
+// X-Large devices (large desktops, 1200px and up)
+@media screen and (min-width: 1200px) {
+    .wide {
+        width: 984px;
+
+        & .row {
+            margin-left: -1 * vars.$pc-gutters;
+            margin-right: -1 * vars.$pc-gutters;
+        }
+    
+        @each $col, $width in vars.$col-numbers {
+            & .col-xl-#{$col} {
+                display: block;
+                @include col-padding(vars.$pc-gutters);
+                flex: 0 0 $width;
+                max-width: $width;
+            }
+        
+            & .offset-xl-#{$col} {
+                margin-left: $width;
+            }
+        }
+    }
+}
